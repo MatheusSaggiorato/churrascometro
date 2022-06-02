@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <title>Churrascometro
+    </title>
+</head>
+
+<body>
+
+    <main>
+        <h2>Churrascômetro</h2>
+
+        <!-- 'oninput' proibe qualquer caractere que não seja um número  -->
+        <input id="adultos" name="adultos" type="number" placeholder="Adultos" min="0"  oninput="validity.valid||(value='');">
+
+        <input id="criancas" name="criancas" type="number" placeholder="Crianças (menor que 11 anos)" min="0"   oninput="validity.valid||(value='');">
+
+        <input id="duracao" name="duracao" type="number" placeholder="Duração (horas)" min="0"   oninput="validity.valid||(value='');">
+
+        <button onclick="calcular()">Calcular</button>
+
+        <div id="resultado">
+            
+        </div>
+
+    </main>
+
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
