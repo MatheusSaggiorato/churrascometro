@@ -13,24 +13,70 @@
 <body>
 
     <main>
-        <h2>Churrascômetro</h2>
+        <h1>Churrascômetro</h1>
 
-        <!-- 'oninput' proibe qualquer caractere que não seja um número  -->
-        <input id="adultos" name="adultos" type="number" placeholder="Adultos" min="0"  oninput="validity.valid||(value='');">
+        <input id="homens" name="adultos" type="number" placeholder="Total de homens" min="0"
+            oninput="validity.valid||(value='');">
 
-        <input id="criancas" name="criancas" type="number" placeholder="Crianças (menor que 11 anos)" min="0"   oninput="validity.valid||(value='');">
+        <input id="mulheres" name="mulheres" type="number" placeholder="Total de mulheres" min="0"
+            oninput="validity.valid||(value='');">
 
-        <input id="duracao" name="duracao" type="number" placeholder="Duração (horas)" min="0"   oninput="validity.valid||(value='');">
+        <input id="criancas" name="criancas" type="number" placeholder="Crianças (menor que 11 anos)" min="0"
+            oninput="validity.valid||(value='');">
 
-        <button onclick="calcular()">Calcular</button>
+        <input id="bebem-alcool" name="bebem-alcool" type="number" placeholder="Pessoas que bebem álcool" min="0"
+            oninput="validity.valid||(value='');">
 
-        <div id="resultado">
-            
+        <input id="duracao" name="duracao" type="number" placeholder="Duração (horas)" min="0"
+            oninput="validity.valid||(value='');">
+
+        <span>
+            <button onclick="calcular()">Calcular</button>
+            <button onclick="clearInputs()">Limpar campos</button>
+        </span>
+
+        <div>
+            <p class="bg-p">Carne de entrada: <br> <span class="destaque-result" id="entrada"></span>
+            </p>
+            <p class="bg-p">Carne principal: <br> <span class="destaque-result" id="principal"></span>
+            </p>
+            <p class="bg-p">Acompanhamentos: <br> <span class="destaque-result" id="acompanhamento"></span></p>
+
+            <p class="bg-p">Refrigerante: <br> <span class="destaque-result" id="refrigerante"></span></p>
+
+            <p class="bg-p">Bebidas Alcoólicas: <br> <span class="destaque-result" id="bebidas"></span></p>
+
+            <p class="bg-p">Carvão: <br> <span class="destaque-result" id="carvao"></span></p>
+        </div>
+
+
+        <p>* carne com osso ou muita gordura aumente 20% do peso</p>
+
+        <div class="footer-credits">
+            <p>Developed by Matheus Saggiorato</p>
+
+            <div class="social-midias-container">
+
+                <a href="https://api.whatsapp.com/send?phone=5554999748017&text=Ol%C3%A1%20Matheus!" target="_blank">
+                    <i class="fa-brands fa-whatsapp icon-social-midia"></i>
+                </a>
+
+                <a href="https://www.linkedin.com/in/matheus-saggiorato" target="_blank">
+                    <i class="fa-brands fa-linkedin-in icon-social-midia"></i>
+                </a>
+
+                <a href="https://github.com/MatheusSaggiorato" target="_blank">
+                    <i class="fa-brands fa-github icon-social-midia"></i>
+                </a>
+            </div>
+
+        </div>
+
         </div>
 
     </main>
 
-
+    <script defer src="https://kit.fontawesome.com/d2e94242a3.js" crossorigin="anonymous"></script>
     <script src="./script.js"></script>
 </body>
 
