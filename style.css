@@ -10,10 +10,11 @@
     --main-blue: #1F3B74;
     --dark-blue: #00061E;
     /* cor da logo */
+    --destaque: #14ff3f;
     --first-blue: #162C40;
     --second-blue: #2675A6;
     --third-blue: #498BA6;
-    --fourth-blue: #B4D2D9;
+    --fourth-blue: #989a9b;
     --dark-theme: #0D0D0D;
     --medium-dark: #262626;
     --light-theme: #FAFBFD;
@@ -27,9 +28,11 @@ body {
 
 body {
     min-height: 100vh;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: .5rem;
 }
 
 h1 {
@@ -37,9 +40,9 @@ h1 {
 }
 
 main {
-    padding: 1rem;
+    padding: 1rem .5rem;
     width: 70%;
-    border-radius: 5px; 
+    border-radius: 5px;
     background-color: var(--third-blue);
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
@@ -50,11 +53,25 @@ main {
     flex-wrap: wrap;
 }
 
-input{
+.inputs-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+input {
     width: 100%;
     border-radius: 5px;
     border: none;
     padding: .2rem;
+}
+
+.inputs-container span {
+    width: 60%;
 }
 
 input::placeholder {
@@ -64,11 +81,13 @@ input::placeholder {
 button {
     padding: .2rem .6rem;
     font-weight: bold;
-    font-size: .8rem;
+    font-size: .9rem;
     color: var(--dark-blue);
+    font-weight: bold;
     border: none;
     border-radius: 5px;
     margin: .4rem;
+    background: var(--destaque);
 }
 
 button:hover {
@@ -76,7 +95,7 @@ button:hover {
 }
 
 .bg-p {
-    padding: .3rem;
+    padding: .5rem;
     background: var(--dark-blue);
     font-weight: 700;
     border-radius: 5px;
@@ -86,7 +105,7 @@ button:hover {
 }
 
 .destaque-result {
-    color: var(--light-theme);
+    color: var(--destaque);
 }
 
 .footer-credits {
@@ -116,4 +135,14 @@ button:hover {
 
 .icon-social-midia:hover {
     transform: scale(1.1);
+}
+
+@media screen and (max-width: 550px) {
+    main {
+        width: 100%;
+    }
+
+    .inputs-container span {
+        width: 100%;
+    }
 }

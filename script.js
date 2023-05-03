@@ -1,30 +1,6 @@
-/*
-
-Churrasco de até 3 horas:
-
-Carvão: 1,2kg por kg de assados
-Carne de entrada: 150g por pessoa.
-Carne principal: 350g por pessoa.
-Acompanhamentos: 150g por pessoa.
-Refrigerantes: 750ml por pessoa por hora.
-Bebidas alcoólicas: 1L por pessoa por hora.
-
-
-
-Churrasco de mais de 4 horas:
-
-Carne de entrada: 200g por pessoa.
-Carne principal: 450g por pessoa.
-Acompanhamentos: 200g por pessoa.
-Refrigerantes: 1500ml por pessoa.
-
-crianças metade de tudo
-
-*/
-
 function validarCampos(...campos) {
     for (const campo of campos) {
-        if (!campo.value || campo.value <= 0) {
+        if (!campo.value) {
             alert('Por favor, preencha todos os campos');
             return true;
         }
@@ -32,69 +8,47 @@ function validarCampos(...campos) {
     return false;
 };
 
-
 function calcular() {
+    const inputs = {
+        homens: document.getElementById("homens"),
+        mulheres: document.getElementById("mulheres"),
+        criancas: document.getElementById("criancas"),
+        bebemAlcool: document.getElementById("bebem-alcool"),
+        duracao: document.getElementById("duracao")
+    };
 
-    const inputHomens = document.getElementById("homens");
-    const inputMulheres = document.getElementById("mulheres");
-    const inputCrianças = document.getElementById("criancas");
-    const inputBebemAlcool = document.getElementById("bebem-alcool");
-    const inputDuracao = document.getElementById("duracao");
-
-    const homens = inputHomens.value;
-    const mulheres = inputMulheres.value;
-    const criancas = inputCrianças.value;
-    const bebemAlcool = inputBebemAlcool.value;
-    const duracao = inputDuracao.value;
-
-    if (validarCampos(inputHomens, inputMulheres, inputCrianças, inputBebemAlcool, inputDuracao)) {
+    if (validarCampos(inputs.homens, inputs.mulheres, inputs.criancas, inputs.bebemAlcool, inputs.duracao)) {
     } else {
 
-        let qtdTotalCarne = carnePorPessoa(duracao) * adultos + (carnePorPessoa(duracao) / 2 * criancas)
-        let qtdTotalCerveja = cervejaPorPessoa(duracao) * adultos
-        let qtdTotalBebidas = bebidasPorPessoa(duracao) * adultos + (bebidasPorPessoa(duracao) / 2 * criancas)
+        const consumo = {
+            carneEntrada: 120,
+            carnePrincipal: inputs.duracao.value <= 3 ? 350 : inputs.duracao.value > 10 ? 1200 : 450,
+            acompanhamentos: inputs.duracao.value <= 3 ? 120 : inputs.duracao.value > 10 ? 400 : 180,
+            refrigerantes: 750,
+            bebidas: 900,
+            carvao: 1.5,
+            mulheres: 0.75,
+            criancas: 0.5,
+            percentualDescontoRefrigerante: 0.7
+        };
 
+        const calcularQuantidadeTotal = (consumoUnitario, perda) => {
+            const { homens, mulheres, criancas } = inputs;
+            return ((consumoUnitario * parseFloat(homens.value)) + (consumoUnitario * parseFloat(mulheres.value) * consumo.mulheres) + (consumoUnitario * parseFloat(criancas.value) * consumo.criancas)) * perda;
+        };
 
-        resultado.innerHTML = `<p>${qtdTotalCarne / 1000} kg de Carne</p>`
-        resultado.innerHTML += `<p>${Math.ceil(qtdTotalCerveja / 355)} Latas de Cerveja</p>`
-        resultado.innerHTML += `<p>${Math.ceil(qtdTotalBebidas / 1000)} Litros de Refrigerante</p>`
+        const qtdTotalEntrada = calcularQuantidadeTotal(consumo.carneEntrada, 1.15);
+        const qtdTotalPrincipal = calcularQuantidadeTotal(consumo.carnePrincipal, 1.15);
+        const qtdTotalAcompanhamento = calcularQuantidadeTotal(consumo.acompanhamentos, 1);
+        const qtdTotalBebidas = parseFloat(inputs.duracao.value) * consumo.bebidas * parseFloat(inputs.bebemAlcool.value);
+        const qtdTotalRefrigerante = (parseFloat(inputs.duracao.value) * calcularQuantidadeTotal(consumo.refrigerantes, 1)) - (qtdTotalBebidas * consumo.percentualDescontoRefrigerante);
+        const qtdTotalCarvao = (qtdTotalEntrada + qtdTotalPrincipal) * consumo.carvao;
 
-        document.querySelector("#entrada").textContent = `${qtdTotalEntrada.replace('.', ',')}gramas`;
-        document.querySelector("#principal").textContent = `${qtdTotalPrincipal.replace('.', ',')}gramas`;
-        document.querySelector("#acompanhamento").textContent = `${qtdTotalAcompanhamento}gramas`;
-        document.querySelector("#refrigerante").textContent = `${qtdTotalRefrigerante}ml = ${Math.ceil(qtdTotalRefrigerante / 2000)} litros de 2 litros`;
-        document.querySelector("#bebidas").textContent = `${qtdTotalBebidas}ml = ${Math.ceil(qtdTotalBebida/ 350)} latas de 350ml`;
-        document.querySelector("#carvao").textContent = `${qtdTotalCarvao}kg`;
+        document.querySelector("#entrada").textContent = `${Math.ceil(qtdTotalEntrada)} gramas`;
+        document.querySelector("#principal").textContent = `${Math.ceil(qtdTotalPrincipal)} gramas`;
+        document.querySelector("#acompanhamento").textContent = `${Math.ceil(qtdTotalAcompanhamento)} gramas`;
+        document.querySelector("#refrigerante").textContent = `${Math.ceil(qtdTotalRefrigerante)}ml ≈ ${Math.ceil(qtdTotalRefrigerante / 2000)} litros de 2 litros`;
+        document.querySelector("#bebidas").textContent = `${Math.ceil(qtdTotalBebidas)}ml ≈ ${Math.ceil(qtdTotalBebidas / 473)} latões de 473ml`;
+        document.querySelector("#carvao").textContent = `${Math.ceil(qtdTotalCarvao)}kg`;
     }
-
-    function carnePorPessoa(duracao) {
-        if (duracao >= 6) {
-            return 700;
-        }
-        else {
-            return 600
-        }
-    }
-
-    function cervejaPorPessoa(duracao) {
-        if (duracao >= 6) {
-            return 1500;
-        }
-        else {
-            return 1100
-        }
-    }
-    function bebidasPorPessoa(duracao) {
-        if (duracao >= 6) {
-            return 1200;
-        }
-        else {
-            return 600
-        }
-    }
-
-}
-
-function clearInputs() {
-    location.reload();
 }

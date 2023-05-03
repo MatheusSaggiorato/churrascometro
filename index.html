@@ -15,25 +15,39 @@
     <main>
         <h1>Churrascômetro</h1>
 
-        <input id="homens" name="adultos" type="number" placeholder="Total de homens" min="0"
-            oninput="validity.valid||(value='');">
+        <div class="inputs-container">
+            <span>
+                <p><strong>Total de homens</strong></p>
+                <input id="homens" name="adultos" type="number" placeholder="Total de homens" min="0">
+            </span>
 
-        <input id="mulheres" name="mulheres" type="number" placeholder="Total de mulheres" min="0"
-            oninput="validity.valid||(value='');">
+            <span>
+                <p><strong>Total de mulheres</strong></p>
+                <input id="mulheres" name="mulheres" type="number" placeholder="Total de mulheres" min="0">
+            </span>
 
-        <input id="criancas" name="criancas" type="number" placeholder="Crianças (menor que 11 anos)" min="0"
-            oninput="validity.valid||(value='');">
+            <span>
+                <p><strong>Total de crianças</strong></p>
+                <input id="criancas" name="criancas" type="number" placeholder="Crianças (menor que 11 anos)" min="0">
+            </span>
 
-        <input id="bebem-alcool" name="bebem-alcool" type="number" placeholder="Pessoas que bebem álcool" min="0"
-            oninput="validity.valid||(value='');">
+            <span>
+                <p><strong>Total de pessoas que bebem</strong></p>
+                <input id="bebem-alcool" name="bebem-alcool" type="number" placeholder="Pessoas que bebem álcool"
+                    min="0">
+            </span>
 
-        <input id="duracao" name="duracao" type="number" placeholder="Duração (horas)" min="0"
-            oninput="validity.valid||(value='');">
+            <span>
+                <p><strong>Duração do churrasco</strong></p>
+                <input id="duracao" name="duracao" type="number" placeholder="Duração do churrasco (horas)" min="0">
+            </span>
+        </div>
 
         <span>
             <button onclick="calcular()">Calcular</button>
-            <button onclick="clearInputs()">Limpar campos</button>
+            <button onclick="location.reload()">Limpar campos</button>
         </span>
+
 
         <div>
             <p class="bg-p">Carne de entrada: <br> <span class="destaque-result" id="entrada"></span>
@@ -50,7 +64,7 @@
         </div>
 
 
-        <p>* carne com osso ou muita gordura aumente 20% do peso</p>
+        <p>* carne com osso ou muita gordura aumente 30% do peso</p>
 
         <div class="footer-credits">
             <p>Developed by Matheus Saggiorato</p>
