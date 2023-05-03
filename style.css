@@ -108,6 +108,10 @@ button:hover {
     color: var(--destaque);
 }
 
+.notes-container {
+    padding: 1rem;
+}
+
 .footer-credits {
     color: var(--light-theme);
     background: var(--dark-blue);
